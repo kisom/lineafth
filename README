@@ -1,0 +1,75 @@
+LINEA
+=====
+
+Linear algebra routines.
+
+Provided libraries:
+	- vector3.fth: R3 vector words
+
+
+VECTOR3
+-------
+
+Vector 3 operates on single-precision vectors. A vector is entered on
+the stack as i j k. The SHOVEC3 word will display the vector:
+
+	kyle@noctis ~/c/f/linea> pforth 
+	PForth V21
+	pForth loading dictionary from file /usr/lib/pforth/pforth.dic
+	     File format version is 8 
+	     Name space size = 120000 
+	     Code space size = 300000 
+	     Entry Point     = 0 
+	     Little  Endian Dictionary
+	Begin AUTO.INIT ------
+	include vector3.fth
+	Include vector3.fth
+	3DUP already defined.
+	    include added 1008 bytes,263556 left.
+	   ok
+	Stack<10> 
+	1 2 3 CR SHOVEC3 CR
+	
+	Vector: i + 2 j + 3 k 
+	   ok
+	Stack<10> 1 2 3 
+
+The following user words are provided; note that stack diagrams
+use i, j, and k to refer to the single-precision vector components.
+
+- 3DUP		-- ( i j k -- i j k i j k )
+- 3SWAP 	-- ( i1 j1 k1 i2 j2 k2 -- i2 j2 k2 i1 j1 k1 )
+- 3DROP		-- ( i j k -- )
+- VEC3ADD: adds two vectors
+		-- ( i1 j1 k1 i2 j2 k2 -- i3 j3 k3 )
+
+	3 4 5 VEC3ADD CR SHOVEC3 CR
+	
+	Vector: 4 i + 6 j + 8 k 
+	   ok
+	Stack<10> 4 6 8 
+
+- VEC3MAG: compute the magnitude of a vector	
+		-- ( i j k -- n )
+- VEC3SMUL: vector scalar multiplication
+		-- ( i j k n -- in jn kn )
+- VEC3DOT: vector dot product
+		-- ( i1 j1 k1 i2 j2 k2 -- i3 j3 k3 )
+
+	1 2 3 4 5 6
+	   ok
+	Stack<10> 1 2 3 4 5 6 
+	VEC3DOT
+	   ok
+	Stack<10> 5 7 9 
+
+- VEC3CROSS: vector cross product
+
+	1 2 3
+	   ok
+	Stack<10> 5 7 9 1 2 3 
+	VEC3CROSS
+	   ok
+	Stack<10> 3 -6 3 
+
+
